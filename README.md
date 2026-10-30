@@ -151,8 +151,7 @@ identically on both sides.
 
 - `assets/cover.png` — cover image
 - `assets/LedgerLock-deck.pptx` — 7-slide pitch deck
-- `SUBMISSION.md` — paste-ready copy, tags, video plan, and the fields that still need the
-  repo and demo URLs
+- `SUBMISSION.md` — paste-ready copy, tags and video plan; only the demo URL is still open
 
 ## Tests
 
