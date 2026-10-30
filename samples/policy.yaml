@@ -1,0 +1,10 @@
+currency: INR
+category_caps:
+  meals: 1500
+  hotel: 6000
+  software: 2500
+  transport: 800
+meals_daily_cap: 2500
+receipt_required_above: 1000
+approval_required_above: 5000
+duplicate_window_days: 7

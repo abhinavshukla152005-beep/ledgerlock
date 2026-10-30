@@ -1,0 +1,53 @@
+name: ledgerlock
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    environment:
+      SANDBOX_BACKEND: docker
+      SANDBOX_IMAGE: ${SANDBOX_IMAGE:-python:3.11-slim}
+      SANDBOX_WORK_ROOT: ${SANDBOX_DIR:-/srv/ledgerlock/sandbox}
+      DB_PATH: /data/ledgerlock.db
+      VULTR_INFERENCE_API_KEY: ${VULTR_INFERENCE_API_KEY:-}
+      VULTR_INFERENCE_MODEL: ${VULTR_INFERENCE_MODEL:-llama-3.3-70b-instruct-fp8}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      # Same absolute path inside and outside the container so bind mounts resolve.
+      - ${SANDBOX_DIR:-/srv/ledgerlock/sandbox}:${SANDBOX_DIR:-/srv/ledgerlock/sandbox}
+      - ledgerlock-data:/data
+    expose:
+      - "8000"
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "python",
+          "-c",
+          "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/health')",
+        ]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    depends_on:
+      - api
+    environment:
+      SITE_ADDRESS: ${SITE_ADDRESS:-:80}
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+
+volumes:
+  ledgerlock-data:
+  caddy-data:
+  caddy-config:
