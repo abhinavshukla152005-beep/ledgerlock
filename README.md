@@ -113,7 +113,7 @@ Production build served by the API: `cd frontend && npm run build`, then restart
 ## Deploy on a Vultr VM
 
 ```bash
-git clone <repo> && cd ledgerlock
+git clone https://github.com/abhinavshukla152005-beep/ledgerlock.git && cd ledgerlock
 cp .env.example .env      # set SITE_ADDRESS and VULTR_INFERENCE_API_KEY
 ./deploy.sh
 ```

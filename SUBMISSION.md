@@ -110,7 +110,7 @@ Caddy · Docker Compose · Vultr Cloud Compute · Vultr Serverless Inference
 
 | Field | Value |
 | --- | --- |
-| GitHub repo | _create + push (GitHub sign-in required)_ |
+| GitHub repo | https://github.com/abhinavshukla152005-beep/ledgerlock (public, MIT) |
 | Demo / application URL | _`http://<vm-ip>` or `https://<name>.sslip.io` after the VM deploy_ |
 | Video presentation | `assets/LedgerLock-deck.pptx` is the slide deck; the ≤3 min video still has to be recorded |
 | Cover image | `assets/cover.png` |
